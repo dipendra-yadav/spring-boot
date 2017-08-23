@@ -1,10 +1,13 @@
 package com.niit.springboot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.niit.springboot.dao.ProductRepository;
 import com.niit.springboot.domain.Product;
 
+
+@Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
