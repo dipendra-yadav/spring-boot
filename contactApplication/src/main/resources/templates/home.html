@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" th:href="@{/css/main.css}" href="../../css/main.css" />
+</head>
+<body>
+    <!-- Create contact Form -->
+	<form method="post" action="saveContact">
+	
+		
+		
+		<label for="id">id:</label>
+		<input type="text" name="id"></input><br/>
+		
+		<label for="firstName">FirstName:</label>
+		<input type="text" name="firstName"></input><br/>
+		
+		<label for="lastName">lastName:</label>
+		<input type="text" name="lastName"></input><br/>
+		
+		<label for="phoneNumber">phoneNumber:</label>
+		<input type="text" name="phoneNumber"></input><br/>
+		
+		<label for="emailAddress">emailAddress:</label>
+		<input type="text" name="emailAddress"></input><br/>
+		
+		<input type="submit" value="submit"/>
+
+
+
+	</form>
+	<br/>
+	<!-- Retrieve contactForm List -->
+	<h4>contactForm List -------</h4>
+	
+	<ul th:each="contact :${contacts}">
+	  <li>
+	   <span th:text="${contact.id}">id</span>
+	    <span th:text="${contact.firstName}">FirstName</span>
+	     <span th:text="${contact.lastName}">lastName</span>
+	      <span th:text="${contact.phoneNumber}">phoneNumber</span>
+	       <span th:text="${contact.emailAddress}">emailAddress</span>
+	
+      </li>
+    </ul>
+    
+	
+	
+
+
+</body>
+</html>
