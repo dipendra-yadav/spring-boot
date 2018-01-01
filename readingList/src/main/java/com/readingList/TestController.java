@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 //Gradle based,spring Boot  Application
 
 
-
+@Component
 @Controller
 public class TestController {
 
