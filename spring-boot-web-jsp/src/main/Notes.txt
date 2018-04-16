@@ -1,4 +1,4 @@
-Spring Boot Hello World Example � JSP
+Spring Boot Hello World Example JSP
 -------------------------------------------------------------------------------------------------------------------
 A Spring Boot web application example, using embedded Tomcat + JSP template, and package as an executable WAR file.
 
@@ -37,7 +37,7 @@ Open the browser type and localhost:8080
 
 Maven package the project as an executable WAR file. A 18M++ WAR file will be generated in the target folder.
 >mvn clean package
-Run It,project$ java -jar target/spring-boot-web-jsp-1.0.war 
+Run It,project$ java -jar target/spring-boot-web-jsp.war 
 and access http://localhost:8080 again.
 
 
@@ -45,6 +45,93 @@ and access http://localhost:8080 again.
 JSP limitations:
 You can’t create an executable jar to run this embedded Tomcat + JSP web example, because of a hard coded file pattern 
 in Tomcat. Read this Spring Boot – JSP limitation.
+
+====================================================================================================================
+
+How to display all beans loaded by Spring Boot
+---------------------------------------------------------------------------------------------------------------------
+In Spring Boot, you can use appContext.getBeanDefinitionNames() to get all the beans loaded by the Spring container.
+
+1. CommandLineRunner as Interface:-
+
+package com.deependra;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+import java.util.Arrays;
+
+@SpringBootApplication
+public class Application implements CommandLineRunner {
+
+    @Autowired
+    private ApplicationContext appContext;
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        String[] beans = appContext.getBeanDefinitionNames();
+        Arrays.sort(beans);
+        for (String bean : beans) {
+            System.out.println(bean);
+        }
+
+    }
+
+}
+op:
+
+application
+customerRepository
+customerRepositoryImpl
+dataSource
+dataSourceInitializedPublisher
+dataSourceInitializer
+dataSourceInitializerPostProcessor
+emBeanDefinitionRegistrarPostProcessor
+entityManagerFactory
+entityManagerFactoryBuilder
+hikariPoolDataSourceMetadataProvider
+jdbcTemplate
+jpaContext
+//...
+
+2. CommandLineRunner as Bean:-
+
+package com.deependra;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import java.util.Arrays;
+
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner run(ApplicationContext appContext) {
+        return args -> {
+
+            String[] beans = appContext.getBeanDefinitionNames();
+            Arrays.stream(beans).sorted().forEach(System.out::println);
+
+        };
+    }
+
+}
+===========================================================================================================================
 
 
 
