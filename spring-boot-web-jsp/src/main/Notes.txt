@@ -1,0 +1,51 @@
+Spring Boot Hello World Example � JSP
+-------------------------------------------------------------------------------------------------------------------
+A Spring Boot web application example, using embedded Tomcat + JSP template, and package as an executable WAR file.
+
+Technologies used :
+1.Spring Boot 1.4.2.RELEASE
+2.Spring 4.3.4.RELEASE
+3.Tomcat Embed 8.5.6
+4.Maven 3
+5.Java 8
+
+===============================================================================================================
+Display project depdencies:
+>mvn dependency:tree
+
+
+================================================================================================================
+JSP + Resources + Static files
+For JSP files, put in src/main/webapp/WEB-INF/jsp/
+
+For static files like CSS or Javascript, put in /src/main/resources/static/
+/src/main/resources/static/css/main.css
+/src/main/resources/static/........
+/src/main/resources/static/....
+
+
+For properties files, put in /src/main/resources/
+/src/main/resources/application.properties
+
+Note
+Spring Boot, convention over configuration, no need to declare the resource mapping like this(https://www.mkyong.com/spring-mvc/spring-mvc-how-to-include-js-or-css-files-in-a-jsp-page/).
+The resource mapping just handles automatically – Read this article – Spring Boot Serving static content
+================================================================================================================
+Start the Spring Boot web app:
+>mvn spring-boot:run
+Open the browser type and localhost:8080
+
+Maven package the project as an executable WAR file. A 18M++ WAR file will be generated in the target folder.
+>mvn clean package
+Run It,project$ java -jar target/spring-boot-web-jsp-1.0.war 
+and access http://localhost:8080 again.
+
+
+
+JSP limitations:
+You can’t create an executable jar to run this embedded Tomcat + JSP web example, because of a hard coded file pattern 
+in Tomcat. Read this Spring Boot – JSP limitation.
+
+
+
+
