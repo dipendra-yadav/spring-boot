@@ -1,0 +1,118 @@
+Spring Boot – Deploy WAR file to Tomcat
+----------------------------------------------------
+In this article, we will show you how to deploy a Spring Boot WAR file to the Tomcat servlet container.
+For Spring Boot WAR deployment, you need to do three steps:
+
+1.Extends SpringBootServletInitializer
+2.Marked the embedded servlet container as provided.
+3.Update packaging to war
+
+
+Tested using 
+Spring Boot 1.4.2.RELEASE
+Tomcat 8.5.9
+Maven 3
+
+
+Note:
+In Spring Boot, the final executable JAR file with embedded server solution may not suitable in all production environments, 
+especially the deployment team (a team with good knowledge of server optimization and monitoring skills, 
+but lack of, the development experience), they want full control of the server, and they don’t touch code.
+
+1.Extends SpringBootServletInitializer
+Make the existing @SpringBootApplication class extends SpringBootServletInitializer
+
+1.1 Classic Spring Boot JAR deployment. (Update this file to support WAR deployment)
+
+SpringBootWebApplication.java
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootWebApplication {
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SpringBootWebApplication.class, args);
+    }
+
+}
+
+1.2 Spring Boot WAR deployment.
+
+SpringBootWebApplication.java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
+
+@SpringBootApplication
+public class SpringBootWebApplication extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(SpringBootWebApplication.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SpringBootWebApplication.class, args);
+    }
+
+}
+
+/*@SpringBootApplication
+public class SpringBootWebApplication {
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SpringBootWebApplication.class, args);
+    }
+
+}*/
+
+
+If you create a extra SpringBootWebApplication class for deployment, 
+make sure tell Spring Boot which main class to start :
+
+pom.xml
+  <properties>
+        <start-class>com.mkyong.NewSpringBootWebApplicationForWAR</start-class>
+  </properties>
+  
+  
+  
+2.Marked the embedded servlet container as provided
+<dependencies>
+
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-thymeleaf</artifactId>
+	</dependency>
+
+	<!-- marked the embedded servlet container as provided -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-tomcat</artifactId>
+		<scope>provided</scope>
+	</dependency>
+
+</dependencies>
+
+3.Update packaging to war
+<packaging>war</packaging>
+
+
+
+References
+Spring Boot – Traditional deployment
+https://docs.spring.io/spring-boot/docs/current/reference/html/howto-traditional-deployment.html
+
+Spring Boot Hello World Example – Thymeleaf
+http://www.mkyong.com/spring-boot/spring-boot-hello-world-example-thymeleaf/
+
+How to Install Apache Tomcat 8 On Debian
+https://www.mkyong.com/tomcat/how-to-install-apache-tomcat-8-on-debian/
+
+
+
+
+
+
+  
