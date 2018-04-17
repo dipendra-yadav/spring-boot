@@ -36,5 +36,12 @@ Solutions:-
         </plugins>
     </build>
  
+ 
+ 
+ References:
+ Spring Boot – The executable jar format
+ https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html
+ Spring Boot Maven Plugin – Usage
+ https://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html
  ====================================================================================================================
   
