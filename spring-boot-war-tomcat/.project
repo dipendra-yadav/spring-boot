@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>spring-boot-web-thymeleaf</name>
+	<name>spring-boot-war-tomcat</name>
 	<comment>Spring Boot Web Thymeleaf Example. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
 	<projects>
 	</projects>
