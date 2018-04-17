@@ -1,0 +1,40 @@
+Spring Boot – Which main class to start
+------------------------------------------------------------------------------------------------------------------
+If Spring Boot project contains multiple main classes, Spring Boot will fail to start or package for deployment.
+
+Terminal
+$ mvn package 
+#or
+$ mvn spring-boot:run
+
+Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.2.RELEASE:run (default-cli) 
+Execution default-cli of goal org.springframework.boot:spring-boot-maven-plugin:1.4.2.RELEASE:run failed: 
+Unable to find a single main class from the following candidates 
+ [com.deependra.Test, com.deependra.App1] -> [Help 1]
+ 
+ 
+ 
+Solutions:-
+1.Define single main class via start-class properties
+
+
+  <properties>
+      <!-- The main class to start by executing java -jar -->
+      <start-class>com.deependra.App2</start-class>
+  </properties>
+  
+2.Alternatively, define the main class in the spring-boot-maven-plugin
+<build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.deependra.App2</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+ 
+ ====================================================================================================================
+  
