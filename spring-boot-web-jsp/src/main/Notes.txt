@@ -132,6 +132,12 @@ public class Application {
     }
 
 }
+
+References:
+CommandLineRunner JavaDoc
+https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/CommandLineRunner.html
+
+Spring Boot non-web application example
 ===========================================================================================================================
 Task
 Spring Boot – How to change Tomcat port
