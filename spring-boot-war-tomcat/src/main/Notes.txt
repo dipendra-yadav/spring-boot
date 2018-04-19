@@ -73,7 +73,7 @@ make sure tell Spring Boot which main class to start :
 
 pom.xml
   <properties>
-        <start-class>com.mkyong.NewSpringBootWebApplicationForWAR</start-class>
+        <start-class>com.deependra.NewSpringBootWebApplicationForWAR</start-class>
   </properties>
   
   

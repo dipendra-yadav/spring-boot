@@ -30,9 +30,37 @@ Hello deependra
 >java -jar target/spring-boot-simple-1.0.jar "donald trump"
 Hello donald trump
 
-===============================================================================================================
 Ref:
 https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/CommandLineRunner.html
+
+=================================================================================================================
+
+Spring Boot – How to disable the Spring logo banner
+1.There are 3 Banner.Mode
+OFF – Disable printing of the banner.
+CONSOLE – Print the banner to System.out.
+LOG – Print the banner to the log file.
+
+
+2. Application properties file.
+spring.main.banner-mode=off
+
+3. Application YAML file.
+application.yml
+spring:
+  main:
+    banner-mode:"off"
+    	
+4. Pass as a system property
+Terminal
+$ java -Dspring.main.banner-mode=off -jar spring-boot-simple-1.0.jar
+
+
+
+    	
+    	
+    	
+    	
 
 
 
