@@ -1,3 +1,4 @@
+Spring Boot Non Web Application:-
 In Spring Boot, to create a non-web application, implements CommandLineRunner and override the run method, for example :
 
 import org.springframework.boot.CommandLineRunner;
@@ -34,8 +35,7 @@ Ref:
 https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/CommandLineRunner.html
 
 =================================================================================================================
-
-Spring Boot – How to disable the Spring logo banner
+Spring Boot – How to disable the Spring logo banner:-
 1.There are 3 Banner.Mode
 OFF – Disable printing of the banner.
 CONSOLE – Print the banner to System.out.

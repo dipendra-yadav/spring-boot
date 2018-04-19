@@ -1,9 +1,8 @@
-Task
-Spring Boot Hello World Example JSP
--------------------------------------------------------------------------------------------------------------------
+
+Spring Boot Hello World Example JSP:-
 A Spring Boot web application example, using embedded Tomcat + JSP template, and package as an executable WAR file.
 
-Technologies used :
+Technologies used :-
 1.Spring Boot 1.4.2.RELEASE
 2.Spring 4.3.4.RELEASE
 3.Tomcat Embed 8.5.6
@@ -11,9 +10,8 @@ Technologies used :
 5.Java 8
 
 ===============================================================================================================
-Display project depdencies:
+Display project dependencies:
 >mvn dependency:tree
-
 
 ================================================================================================================
 JSP + Resources + Static files
@@ -48,13 +46,11 @@ You can’t create an executable jar to run this embedded Tomcat + JSP web examp
 in Tomcat. Read this Spring Boot – JSP limitation.
 
 ====================================================================================================================
-Task
 How to display all beans loaded by Spring Boot
----------------------------------------------------------------------------------------------------------------------
+
 In Spring Boot, you can use appContext.getBeanDefinitionNames() to get all the beans loaded by the Spring container.
 
 1. CommandLineRunner as Interface:-
-
 package com.deependra;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -106,7 +102,6 @@ jpaContext
 2. CommandLineRunner as Bean:-
 
 package com.deependra;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -136,12 +131,8 @@ public class Application {
 References:
 CommandLineRunner JavaDoc
 https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/CommandLineRunner.html
-
-Spring Boot non-web application example
 ===========================================================================================================================
-Task
-Spring Boot – How to change Tomcat port
-
+Spring Boot – How to change Tomcat port:-
 In Spring Boot, to change the embedded Tomcat initialized port (8080), update server.port properties.
 
 1.Properties & Yaml(YAML (YAML Ain't Markup Language) )
@@ -186,8 +177,7 @@ Terminal
 java -jar -Dserver.port=8888 spring-boot-example-1.0.jar
 
 =============================================================================================================
-Task
-Spring Boot – How to change Context Path
+Spring Boot – How to change Context Path:-
 
 In Spring Boot, to change the context path, update server.contextPath properties. 
 The following examples update the context path from / to /deependra or http://localhost:8080/deependra
@@ -247,10 +237,112 @@ References
 Spring Boot – Embedded servlet containers
 Spring Boot – Externalized Configuration
 https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
-Spring Boot – How to change Tomcat port
+=========================================================================================================
+Spring Boot – Jetty as embedded server:-
+By default, Spring Boot use Tomcat as the default embedded server, to change it to Jetty, just exclude Tomcat and 
+include Jetty like this :
+
+1. spring-boot-starter-web
+pom.xml
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+		<exclusions>
+			<exclusion>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-tomcat</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-jetty</artifactId>
+	</dependency>
+
+
+References
+Spring Boot – Embedded servlet containers
+Jetty Server
+http://www.eclipse.org/jetty/
+
+===============================================================================================================
+
+Spring Boot – Show Hibernate SQL query:-
+===============================================================================================================
+Spring Boot – How to know which connection pool is used?
+
+In Spring Boot, 
+@Autowired javax.sql.DataSource, and you will know which database connection pool is using in the current 
+running application.
+
+1. Test Default
+Spring Boot example to print a javax.sql.DataSource
+
+Note
+Read this official Spring Boot doc – Connection to a production database, to understand the algorithm 
+for choosing a DataSource implementations – Tomcat pooling, HikariCP, Commons DBCP and Commons DBCP2.
+
+package com.deependra;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.sql.DataSource;
+@SpringBootApplication
+public class SpringBootConsoleApplication implements CommandLineRunner {
+
+    @Autowired
+    DataSource dataSource;
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SpringBootConsoleApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        System.out.println("DATASOURCE = " + dataSource);
+
+    }
+
+}
+DATASOURCE = org.apache.tomcat.jdbc.pool.DataSource@7c541c15...
+Spring Boot is using Tomcat pooling by default.
+
+2. Test HikariCP
+To switch to another connection pool, for example HikariCP, just exclude the default and include the HikariCP 
+in the classpath.
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- connection pools -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+DATASOURCE = HikariDataSource (HikariPool-1)
+======================================================================================================
 
 
 
-         
+
+
+
+
+
 
 
